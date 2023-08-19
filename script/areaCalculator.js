@@ -10,6 +10,7 @@ function calculateTriangleArea() {
   const area = 0.5 * baseFieldValue * triangleHeightFieldValue;
   const areaSpan = document.getElementById("triangle-area");
   areaSpan.innerText = area;
+  addToCalculationEntry("triangle", area);
 }
 
 // rectangle function
@@ -25,6 +26,7 @@ function calculateRectangleArea() {
   const area = rectangleWidth * rectangleLength;
   const areaSpan = document.getElementById("rectangle-area");
   areaSpan.innerText = area;
+  addToCalculationEntry("rectangle", area);
 }
 
 function calculateParallelogramArea() {
@@ -38,6 +40,8 @@ function calculateParallelogramArea() {
 
   const area = base * height;
   setElementInnerText("parallelogram-area", area);
+
+  addToCalculationEntry("parallelogram", area);
 }
 
 function calculateEllipseArea() {
@@ -51,6 +55,8 @@ function calculateEllipseArea() {
   const areaFixed = area.toFixed(2);
   const areaFixedNumber = parseFloat(areaFixed);
   setElementInnerText("ellipse-area", areaFixedNumber);
+
+  addToCalculationEntry("ellipse", areaFixedNumber);
 }
 
 // get element by using function
@@ -65,4 +71,16 @@ function inputField(inputId) {
 function setElementInnerText(elementId, areaValue) {
   const element = document.getElementById(elementId);
   element.innerText = areaValue;
+}
+
+// add to calculation entry
+function addToCalculationEntry(areaType, area) {
+  const calculationEntry = document.getElementById("calculation-entry");
+  const count = calculationEntry.childElementCount;
+  const p = document.createElement("p");
+  calculationEntry.append(p);
+  p.classList.add("my-4");
+  p.innerHTML = `${
+    count + 1
+  }. ${areaType} ${area} cm <sup>2</sup> <button class="btn btn-primary btn-sm">Count</button>`;
 }
